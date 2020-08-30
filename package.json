@@ -14,7 +14,8 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
-    "gatsby": "^2.24.47",
+    "@reach/router": "^1.3.4",
+    "gatsby": "^2.24.51",
     "gatsby-plugin-sass": "^2.3.12",
     "gatsby-plugin-typography": "^2.5.10",
     "node-sass": "^4.14.1",
