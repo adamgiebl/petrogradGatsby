@@ -14,7 +14,9 @@ export default function Home() {
   }, []);
   return (
     <>
-      <Link to="/detail/1">First item</Link>
+      <Link to="/app/detail" ids="2">
+        First item
+      </Link>
       <main className="items">
         {categories &&
           categories.map((cat) => <Category key={cat} category={cat} />)}

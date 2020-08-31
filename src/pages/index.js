@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Router } from "@reach/router";
 import Home from "../components/Home";
 import Header from "../components/Header";
-import { fetchJson } from "../utils/helpers";
-import { API } from "../utils/constants";
-
-const SomeSubPage = (props) => {
-  return <div>Hi from SubPage with id: {props.id}</div>;
-};
+import Detail from "../pages/app/detail";
 
 const App = () => {
   return (
@@ -15,7 +10,7 @@ const App = () => {
       <Header />
       <Router>
         <Home path="/" />
-        <SomeSubPage path="/detail/:id" />
+        <Detail path="/app/detail/:id" />
       </Router>
     </>
   );
