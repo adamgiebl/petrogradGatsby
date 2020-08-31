@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import hero from "../images/hero.jpg";
-import { fetchJson } from "../utils/helpers";
-import { API } from "../utils/constants";
+import { graphql, useStaticQuery } from "gatsby";
 const Header = () => {
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    fetchJson(API.CATEGORIES).then((categories) => {
-      setCategories(categories);
-    });
-  }, []);
+  const {
+    allCategoryType: { nodes: categories },
+  } = useStaticQuery(graphql`
+    query {
+      allCategoryType {
+        nodes {
+          name
+        }
+      }
+    }
+  `);
   return (
     <header className="header">
       <nav>
@@ -16,8 +20,8 @@ const Header = () => {
         <ul>
           {categories &&
             categories.map((cat) => (
-              <li key={cat}>
-                <a href={`#${cat}`}>{cat}</a>
+              <li key={cat.name}>
+                <a href={`#${cat.name}`}>{cat.name}</a>
               </li>
             ))}
         </ul>

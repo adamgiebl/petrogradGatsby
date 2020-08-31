@@ -1,25 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Category from "./Category";
-import { Link } from "gatsby";
 import "./index.sass";
-import { fetchJson } from "../utils/helpers";
-import { API } from "../utils/constants";
+import { graphql, useStaticQuery } from "gatsby";
 
 export default function Home() {
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    fetchJson(API.CATEGORIES).then((categories) => {
-      setCategories(categories);
-    });
-  }, []);
+  const {
+    allCategoryType: { nodes: categories },
+  } = useStaticQuery(graphql`
+    query {
+      allCategoryType {
+        nodes {
+          name
+        }
+      }
+    }
+  `);
+
   return (
     <>
-      <Link to="/app/detail" ids="2">
-        First item
-      </Link>
       <main className="items">
         {categories &&
-          categories.map((cat) => <Category key={cat} category={cat} />)}
+          categories.map((cat) => (
+            <Category key={cat.name} category={cat.name} />
+          ))}
       </main>
     </>
   );
