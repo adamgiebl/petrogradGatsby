@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
-import Category from "./Category";
+import { Router } from "@reach/router";
+import Home from "../components/Home";
+import Header from "../components/Header";
 import { fetchJson } from "../utils/helpers";
 import { API } from "../utils/constants";
-import "./index.sass";
 
-export default function Home() {
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    fetchJson(API.CATEGORIES).then((categories) => {
-      setCategories(categories);
-    });
-  }, []);
+const SomeSubPage = (props) => {
+  return <div>Hi from SubPage with id: {props.id}</div>;
+};
 
+const App = () => {
   return (
     <>
-      <Header categories={categories} />
-      <main className="items">
-        {categories &&
-          categories.map((cat) => <Category key={cat} category={cat} />)}
-      </main>
+      <Header />
+      <Router>
+        <Home path="/" />
+        <SomeSubPage path="/detail/:id" />
+      </Router>
     </>
   );
-}
+};
+
+export default App;
