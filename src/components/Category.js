@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { API, SIZES } from "../utils/constants";
-import { fetchJson, getImageSrc } from "../utils/helpers";
-import { graphql, useStaticQuery } from "gatsby";
+import { getImageSrc } from "../utils/helpers";
+import { graphql, useStaticQuery, Link } from "gatsby";
 import Vectors from "../utils/vectors";
 
 const Category = ({ category }) => {
@@ -38,7 +38,9 @@ const Category = ({ category }) => {
                   src={getImageSrc(course.image, SIZES.MEDIUM)}
                   alt={course.name}
                 />
-                <div className="course__name">{course.name}</div>
+                <Link to={`/${course.image}`}>
+                  <div className="course__name">{course.name}</div>
+                </Link>
                 {course.soldout && (
                   <div className="course__sold-out">
                     <span>Sold out</span>

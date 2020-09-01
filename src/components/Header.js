@@ -21,7 +21,7 @@ const Header = () => {
           {categories &&
             categories.map((cat) => (
               <li key={cat.name}>
-                <a href={`#${cat.name}`}>{cat.name}</a>
+                <a href={`/#${cat.name}`}>{cat.name}</a>
               </li>
             ))}
         </ul>

@@ -2,6 +2,7 @@ import React from "react";
 import Category from "./Category";
 import "./index.sass";
 import { graphql, useStaticQuery } from "gatsby";
+import Header from "./Header";
 
 export default function Home() {
   const {
@@ -18,6 +19,7 @@ export default function Home() {
 
   return (
     <>
+      <Header />
       <main className="items">
         {categories &&
           categories.map((cat) => (
