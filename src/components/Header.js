@@ -1,6 +1,5 @@
 import React from "react";
-import hero from "../images/hero.jpg";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery, Link } from "gatsby";
 const Header = () => {
   const {
     allCategoryType: { nodes: categories },
@@ -16,18 +15,20 @@ const Header = () => {
   return (
     <header className="header">
       <nav>
-        <h1>Petrograd</h1>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <h1>Petrograd</h1>
+        </Link>
         <ul>
           {categories &&
             categories.map((cat) => (
               <li key={cat.name}>
-                <a href={`/#${cat.name}`}>{cat.name}</a>
+                <Link to={`/#${cat.name}`}>{cat.name}</Link>
               </li>
             ))}
         </ul>
       </nav>
 
-      <img className="hero" src={hero} alt="hero" />
+      {/*<img className="hero" src={hero} alt="hero" />*/}
     </header>
   );
 };

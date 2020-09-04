@@ -3,23 +3,35 @@ const fetch = require(`node-fetch`);
 const fetchJson = (url) => fetch(url).then((res) => res.json());
 
 exports.createPages = async function ({ actions, graphql }) {
-  const { data } = await graphql(`
+  const {
+    data: {
+      allProductType: { nodes: courses },
+    },
+  } = await graphql(`
     query {
       allProductType {
         nodes {
           id
           image
+          category
         }
       }
     }
   `);
-  data.allProductType.nodes.forEach((edge) => {
+  courses.forEach((edge, i) => {
     const slug = edge.image;
     console.log("generating", edge.id);
     actions.createPage({
       path: slug,
       component: require.resolve(`./src/components/Detail.js`),
-      context: { slug: slug, id: edge.id },
+      context: {
+        slug: slug,
+        id: edge.id,
+        category: edge.category,
+        hello: "hoj",
+        prev: i === 0 ? null : courses[i - 1].image,
+        next: i === courses.length - 1 ? null : courses[i + 1].image,
+      },
     });
   });
 };

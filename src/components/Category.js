@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { API, SIZES } from "../utils/constants";
+import React from "react";
+import { SIZES } from "../utils/constants";
 import { getImageSrc } from "../utils/helpers";
 import { graphql, useStaticQuery, Link } from "gatsby";
 import Vectors from "../utils/vectors";
@@ -30,27 +30,27 @@ const Category = ({ category }) => {
           courses
             .filter((c) => c.category === category)
             .map((course) => (
-              <article className="course" key={course.id}>
-                {Vectors.table}
-                <div className="course__plate">{Vectors.plate}</div>
-                <img
-                  className="course__image"
-                  src={getImageSrc(course.image, SIZES.MEDIUM)}
-                  alt={course.name}
-                />
-                <Link to={`/${course.image}`}>
+              <Link to={`/${course.image}`} key={course.id}>
+                <article className="course">
+                  {Vectors.table}
+                  <div className="course__plate">{Vectors.plate}</div>
+                  <img
+                    className="course__image"
+                    src={getImageSrc(course.image, SIZES.MEDIUM)}
+                    alt={course.name}
+                  />
                   <div className="course__name">{course.name}</div>
-                </Link>
-                {course.soldout && (
-                  <div className="course__sold-out">
-                    <span>Sold out</span>
+                  {course.soldout && (
+                    <div className="course__sold-out">
+                      <span>Sold out</span>
+                    </div>
+                  )}
+                  <div className="course__footer">
+                    {course.vegetarian && Vectors.vegetarianSmall}
+                    <span className="course__price">{course.price},-</span>
                   </div>
-                )}
-                <div className="course__footer">
-                  {course.vegetarian && Vectors.vegetarian}
-                  <span className="course__price">{course.price},-</span>
-                </div>
-              </article>
+                </article>
+              </Link>
             ))}
       </div>
     </section>
