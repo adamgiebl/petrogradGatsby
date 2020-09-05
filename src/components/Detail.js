@@ -1,6 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import { SIZES } from "../utils/constants";
 import { getImageSrc } from "../utils/helpers";
 import Vectors from "../utils/vectors";
@@ -45,10 +45,29 @@ export default function Detail({
               {course.alcohol !== 0 && (
                 <span className="alcoholic">alcoholic</span>
               )}
-              <span className="price">{course.price},-</span>
+              <span className="price">
+                {course.discount ? (
+                  <span>
+                    <strike style={{ color: "red" }}>{course.price},-</strike>
+                    {course.price - course.discount},-
+                  </span>
+                ) : (
+                  <span>{course.price},-</span>
+                )}
+              </span>
             </div>
           </div>
         </div>
+        {pageContext.prev && (
+          <Link to={`/${pageContext.prev}`}>
+            <button className="previous">{"<"}</button>
+          </Link>
+        )}
+        {pageContext.next && (
+          <Link to={`/${pageContext.next}`}>
+            <button className="next">{">"}</button>
+          </Link>
+        )}
       </section>
       <Helmet>
         <title>{course.name}</title>

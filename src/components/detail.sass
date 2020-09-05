@@ -3,7 +3,7 @@ $red: #C20404
 $green: #4ba085
 $black: #1D1D35
 $darkblue: #282848
-    
+
 .detail-page
     display: grid
     grid-template-rows: auto 1fr
@@ -11,12 +11,28 @@ $darkblue: #282848
     background: ghostwhite
     height: 650px
     margin: auto
-    margin-top: 50px
+    margin-top: 20px
     z-index: 1
     background: white
     color: $black
     padding: 0
-    
+    position: relative
+
+    .previous, .next
+        position: absolute
+        width: 50px
+        height: 50px
+        display: block
+        top: 50%
+        background: $darkblue
+        color: white
+        border: 0
+        border-radius: 5px
+    .previous
+        left: -100px
+    .next
+        right: -100px
+
     img.main
         width: 100%
         margin: auto
@@ -70,7 +86,7 @@ $darkblue: #282848
         .price
             font-size: 30px
             font-weight: 500
-        
+
         .place
             display: flex
             align-items: center
@@ -85,6 +101,3 @@ $darkblue: #282848
         align-items: center
         &--top
             font-weight: 500
-        
-    
-
